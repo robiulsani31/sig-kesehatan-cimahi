@@ -8,6 +8,9 @@ class WebController extends Controller
 {
     public function index()
     {
-        return view('v_web');
+        $data= [
+            'title' => 'Pemetaan',
+        ];
+        return view('v_web', $data);
     }
 }
