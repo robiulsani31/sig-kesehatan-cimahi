@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div id="map" style="width: 100%; height:550px;"></div>
+<div id="map" style="width: 100%; height:500px;"></div>
 
 <script>
    var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -19,7 +19,6 @@
 	    maxZoom: 20,
 	    attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
-
 
     var peta4 = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
 	    maxZoom: 20,

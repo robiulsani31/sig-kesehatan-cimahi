@@ -25,3 +25,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('kecamatan');
 Route::get('/kecamatan/add', [KecamatanController::class, 'add']);
 Route::post('/kecamatan/insert', [KecamatanController::class, 'insert']);
+Route::get('/kecamatan/edit/{id_kecamatan}', [KecamatanController::class, 'edit']);
+Route::post('/kecamatan/update/{id_kecamatan}', [KecamatanController::class, 'update']);
+Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'delete']);

@@ -22,20 +22,23 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="50px">No</th>
+                        <th width="50px" class="text-center">No</th>
                         <th>Kecamatan</th>
                         <th width="50px">Warna</th>
-                        <th width="150px">Action</th>
+                        <th width="100px" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no=1; ?>
                     @foreach ($kecamatan as $data)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td class="text-center">{{ $no++ }}</td>
                             <td>{{ $data->kecamatan }}</td>
                             <td style="background-color: {{ $data->warna }}"></td>
-                            <td></td>
+                            <td class="text-center">
+                                <a href="/kecamatan/edit/{{ $data->id_kecamatan }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+                                <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{ $data->id_kecamatan }}"><i class="fa fa-trash"></i></button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -45,6 +48,30 @@
     </div>
     <!-- /.card -->
 </div>
+
+@foreach ($kecamatan as $data)
+    <div class="modal fade" id="delete{{ $data->id_kecamatan }}">
+        <div class="modal-dialog">
+          <div class="modal-content bg-danger">
+            <div class="modal-header">
+              <h4 class="modal-title">{{ $data->kecamatan }}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Apakah Anda Ingin Hapus Data Ini ?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="/kecamatan/delete/{{ $data->id_kecamatan }}" type="button" class="btn btn-outline-light">Yes</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+@endforeach
 
 <script>
   $(function () {
