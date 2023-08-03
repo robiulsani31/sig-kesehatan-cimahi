@@ -11,8 +11,8 @@
     });
 
     var peta2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	    maxZoom: 20,
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+	    maxZoom: 19,
+        attribution: 'Tiles &copy; IGP, UPR-EGP, and the GIS User Community'
     });
 
     var peta3 = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
@@ -25,10 +25,20 @@
 	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     });
  
+    @foreach($kecamatan as $data)
+        var data{{ $data->id_kecamatan }} = L.layerGroup();
+    @endforeach
+    
+    
     var map = L.map('map', {
         center: [-6.882178649368701, 107.54229120658208],
-        zoom: 14,
-        layers: [peta1]
+        zoom: 13,
+        layers: [peta2,
+        @foreach ($kecamatan as $data)
+            data{{ $data->id_kecamatan }},
+        @endforeach
+
+    ]
     });
 
     var baseMaps = {
@@ -37,8 +47,25 @@
     "Streets": peta3,
     "Dark": peta4,
     };
+    
+    var overlayer = {
+        @foreach($kecamatan as $data)
+            "{{ $data->kecamatan }}" : data{{ $data->id_kecamatan }},
+        @endforeach
 
-    var layerControl = L.control.layers(baseMaps).addTo(map);
+    };
+
+    var layerControl = L.control.layers(baseMaps, overlayer).addTo(map);
+
+    @foreach ($kecamatan as $data)
+        L.geoJSON(<?= $data->geojson ?>,{
+            style : {
+                color : 'white',
+                fillColor: '{{ $data->warna }}',
+                fillOpacity: '0.4'
+            },
+        }).addTo(data{{ $data->id_kecamatan }}).bindPopup("{{ $data->kecamatan }}");
+    @endforeach
 
 </script>
 
