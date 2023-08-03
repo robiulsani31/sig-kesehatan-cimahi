@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KategoriController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +29,6 @@ Route::post('/kecamatan/insert', [KecamatanController::class, 'insert']);
 Route::get('/kecamatan/edit/{id_kecamatan}', [KecamatanController::class, 'edit']);
 Route::post('/kecamatan/update/{id_kecamatan}', [KecamatanController::class, 'update']);
 Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'delete']);
+
+//Kategori Layanan
+Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
