@@ -21,4 +21,91 @@ class KategoriController extends Controller
         ];
         return view('admin.kategori.v_index', $data);
     }
+
+    public function add()
+    {
+        $data= [
+            'title' => 'Add Kategori Layanan',
+            
+        ];
+        return view('admin.kategori.v_add', $data);
+    }
+
+    public function insert()
+    {
+        Request()->validate([
+            'kategori' => 'required',
+            'icon' => 'required',
+        ],[
+            'kategori.required' => 'Wajib Diisi',
+            'icon.required' => 'Wajib Diisi',
+        ]);
+
+        $file = Request()->icon;
+        $filename = $file->getClientOriginalName();
+        $file->move(public_path('icon'), $filename);
+
+        $data = [
+            'kategori' => Request()->kategori,
+            'icon' => $filename,
+        ];
+
+        $this->Kategori->InsertData($data);
+        return redirect()->route('kategori')->with('pesan', 'Data Berhasil Ditambahkan');
+
+    }
+
+    public function edit($id)
+    {
+        $data= [
+            'title' => 'Edit Kategori Layanan',
+            'kategori' => $this->Kategori->DetailData($id),
+        ];
+        return view('admin.kategori.v_edit', $data);
+    }
+
+    public function update($id)
+    {
+        Request()->validate(
+            [
+                'kategori' => 'required',
+            ],
+            [
+                'kategori.required' => 'Wajib diisi !!!',
+            ]
+        );
+
+        if (Request()->icon <> "") {
+            // jika ingin ganti icon
+            $file = Request()->icon;
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('icon'), $filename);
+            $data = [
+                'kategori' => Request()->kategori,
+                'icon' => $filename,
+            ];
+    
+            $this->Kategori->UpdateData($id, $data);
+        }
+        else {
+            // jika tidak ganti icon
+            $data = [
+                'kategori' => Request()->kategori,
+            ];
+    
+            $this->Kategori->UpdateData($id, $data);
+        }
+        return redirect()->route('kategori')->with('pesan', 'Data Berhasil Di Update');
+
+       
+
+        $this->Kategori->UpdateData($id, $data);
+        return redirect()->route('kecamatan')->with('pesan', 'Data Berhasil Di Update');
+    }
+
+    public function delete($id)
+    {
+        $this->Kategori->DeleteData($id);
+        return redirect()->route('kategori')->with('pesan', 'Data Berhasil Di Delete');
+    }
 }

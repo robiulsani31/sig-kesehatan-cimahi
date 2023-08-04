@@ -32,3 +32,9 @@ Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'del
 
 //Kategori Layanan
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
+Route::get('/kategori/add', [KategoriController::class, 'add']);
+Route::post('/kategori/insert', [KategoriController::class, 'insert']);
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
+Route::post('/kategori/update/{id}', [KategoriController::class, 'update']);
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
+

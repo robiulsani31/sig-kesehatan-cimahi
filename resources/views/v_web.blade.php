@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div id="map" style="width: 100%; height:500px;"></div>
+<div id="map" style="width: 100%; height:550px;"></div>
 
 <script>
    var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
