@@ -55,16 +55,16 @@ class KategoriController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit($id_kategori)
     {
         $data= [
             'title' => 'Edit Kategori Layanan',
-            'kategori' => $this->Kategori->DetailData($id),
+            'kategori' => $this->Kategori->DetailData($id_kategori),
         ];
         return view('admin.kategori.v_edit', $data);
     }
 
-    public function update($id)
+    public function update($id_kategori)
     {
         Request()->validate(
             [
@@ -85,7 +85,7 @@ class KategoriController extends Controller
                 'icon' => $filename,
             ];
     
-            $this->Kategori->UpdateData($id, $data);
+            $this->Kategori->UpdateData($id_kategori, $data);
         }
         else {
             // jika tidak ganti icon
@@ -93,19 +93,19 @@ class KategoriController extends Controller
                 'kategori' => Request()->kategori,
             ];
     
-            $this->Kategori->UpdateData($id, $data);
+            $this->Kategori->UpdateData($id_kategori, $data);
         }
         return redirect()->route('kategori')->with('pesan', 'Data Berhasil Di Update');
 
        
 
-        $this->Kategori->UpdateData($id, $data);
+        $this->Kategori->UpdateData($id_kategori, $data);
         return redirect()->route('kecamatan')->with('pesan', 'Data Berhasil Di Update');
     }
 
-    public function delete($id)
+    public function delete($id_kategori)
     {
-        $this->Kategori->DeleteData($id);
+        $this->Kategori->DeleteData($id_kategori);
         return redirect()->route('kategori')->with('pesan', 'Data Berhasil Di Delete');
     }
 }

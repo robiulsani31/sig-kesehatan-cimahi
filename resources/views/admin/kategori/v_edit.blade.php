@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">Edit Data</h3>
         </div>
-        <form action="/kategori/update/{{ $kategori->id }}" method="POST" enctype="multipart/form-data">
+        <form action="/kategori/update/{{ $kategori->id_kategori }}" method="POST" enctype="multipart/form-data">
             @csrf
         <div class="card-body">
                 <div class="row">

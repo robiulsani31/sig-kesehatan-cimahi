@@ -62,7 +62,7 @@
             style : {
                 color : 'white',
                 fillColor: '{{ $data->warna }}',
-                fillOpacity: '0.4'
+                fillOpacity: '0.3'
             },
         }).addTo(data{{ $data->id_kecamatan }}).bindPopup("{{ $data->kecamatan }}");
     @endforeach

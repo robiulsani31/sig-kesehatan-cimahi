@@ -20,23 +20,23 @@ class Kategori extends Model
             ->insert($data);
     }
 
-    public function DetailData($id)
+    public function DetailData($id_kategori)
     {
         return DB::table('kategoris')
-            ->where('id', $id)->first();
+            ->where('id_kategori', $id_kategori)->first();
     }
 
-    public function UpdateData($id, $data)
+    public function UpdateData($id_kategori, $data)
     {
         DB::table('kategoris')
-        ->where('id',$id)
+        ->where('id_kategori',$id_kategori)
             ->update($data);
     }
 
-    public function DeleteData($id)
+    public function DeleteData($id_kategori)
     {
         DB::table('kategoris')
-        ->where('id',$id)
+        ->where('id_kategori',$id_kategori)
             ->delete();
     }
 }

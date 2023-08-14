@@ -23,8 +23,8 @@
                 <thead>
                     <tr>
                         <th width="50px" class="text-center">No</th>
-                        <th>Kategori</th>
-                        <th width="50px">Icon</th>
+                        <th class="text-center">Kategori</th>
+                        <th class="text-center" width="100">Icon</th>
                         <th width="100px" class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -33,11 +33,11 @@
                     @foreach ($kategori as $data)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
-                            <td>{{ $data->kategori }}</td>
-                            <td><img src="{{ asset('icon') }}/{{ $data->icon }}" alt="" width="80px"></td>
+                            <td class="text-center">{{ $data->kategori }}</td>
+                            <td class="text-center"><img src="{{ asset('icon') }}/{{ $data->icon }}" alt="" width="80px"></td>
                             <td class="text-center">
-                                <a href="/kategori/edit/{{ $data->id }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
-                                <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                <a href="/kategori/edit/{{ $data->id_kategori }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+                                <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{ $data->id_kategori }}"><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -50,7 +50,7 @@
 </div>
 
 @foreach ($kategori as $data)
-    <div class="modal fade" id="delete{{ $data->id }}">
+    <div class="modal fade" id="delete{{ $data->id_kategori }}">
         <div class="modal-dialog">
           <div class="modal-content bg-danger">
             <div class="modal-header">
@@ -64,7 +64,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-              <a href="/kategori/delete/{{ $data->id }}" type="button" class="btn btn-outline-light">Yes</a>
+              <a href="/kategori/delete/{{ $data->id_kategori }}" type="button" class="btn btn-outline-light">Yes</a>
             </div>
           </div>
           <!-- /.modal-content -->
