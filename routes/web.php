@@ -55,3 +55,7 @@ Route::post('/user/insert', [UserController::class, 'insert']);
 Route::get('/user/edit/{id}', [UserController::class, 'edit']);
 Route::post('/user/update/{id}', [UserController::class, 'update']);
 Route::get('/user/delete/{id}', [UserController::class, 'delete']);
+
+//frontend
+Route::get('/kecamatan/{id}', [WebController::class, 'kecamatan']);
+Route::get('/kategori/{id}', [WebController::class, 'kategori']);

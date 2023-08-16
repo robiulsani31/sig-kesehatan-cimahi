@@ -39,7 +39,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="{{ asset('AdminLTE') }}/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset('AdminLTE') }}/dist/js/demo.js"></script>
-  <!-- page script -->
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

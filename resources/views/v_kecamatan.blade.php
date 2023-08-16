@@ -4,6 +4,34 @@
 
 <div id="map" style="width: 100%; height:550px; box-shadow:10px 10px 10px #888888;"></div>
 
+<div class="col-sm-12">
+    <br><br>
+    <div class="text-center">
+        <h2><b>Data Tempat Layanan {{ $title }}</b></h2>
+    </div>
+    <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th width="50px" class="text-center">No</th>
+                        <th class="text-center">Nama_Tempat</th>
+                        <th class="text-center">Kategori</th>
+                        <th class="text-center">Koordinat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no=1; ?>
+                    @foreach ($tempat_layanan as $data)
+                        <tr>
+                            <td class="text-center">{{ $no++ }}</td>
+                            <td class="text-center">{{ $data->nama_tempat }}</td>
+                            <td class="text-center">{{ $data->kategori }}</td>
+                            <td class="text-center">{{ $data->posisi }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+</div>
+
 <script>
    var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    maxZoom: 20,
@@ -25,21 +53,20 @@
 	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     });
  
-    @foreach($kecamatan as $data)
-        var data{{ $data->id_kecamatan }} = L.layerGroup();
+    @foreach ($kategori as $data)
+        var kategori{{ $data->id_kategori }} = L.layerGroup();
     @endforeach
-        
-    var tempat_layanan = L.layerGroup();
     
-    
+    var data{{ $kec->id_kecamatan }} = L.layerGroup();
+
     var map = L.map('map', {
         center: [-6.882178649368701, 107.54229120658208],
         zoom: 13,
-        layers: [peta2,
-        @foreach ($kecamatan as $data)
-            data{{ $data->id_kecamatan }},
+        layers: [peta2,data{{ $kec->id_kecamatan }},
+        @foreach ($kategori as $data)
+            kategori{{ $data->id_kategori }},
         @endforeach
-        tempat_layanan,
+       
     ]
     });
 
@@ -51,23 +78,23 @@
     };
     
     var overlayer = {
-        @foreach($kecamatan as $data)
-            "{{ $data->kecamatan }}" : data{{ $data->id_kecamatan }},
+        "{{ $kec->kecamatan }}" : data{{ $kec->id_kecamatan }},
+        @foreach ($kategori as $data)
+            "{{ $data->kategori }}" : kategori{{ $data->id_kategori}},
         @endforeach
-        "Tempat Layanan" : tempat_layanan,
     };
 
     var layerControl = L.control.layers(baseMaps, overlayer).addTo(map);
 
-    @foreach ($kecamatan as $data)
-        L.geoJSON(<?= $data->geojson ?>,{
+    var kec = L.geoJSON(<?= $kec->geojson ?>,{
             style : {
                 color : 'white',
-                fillColor: '{{ $data->warna }}',
+                fillColor: '{{ $kec->warna }}',
                 fillOpacity: '0.3'
             },
-        }).addTo(data{{ $data->id_kecamatan }}).bindPopup("{{ $data->kecamatan }}");
-    @endforeach
+        }).addTo(data{{ $kec->id_kecamatan }}).bindPopup("{{ $kec->kecamatan }}");
+
+        map.fitBounds(kec.getBounds());
 
     @foreach ($tempat_layanan as $data)
     var iconTempatLayanan = L.icon({
@@ -76,11 +103,30 @@
     });
 
     var informasi = '<table class="table table-bordered"><tr><td class="text-center" colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="140px"></td></tr><tbody><tr><td>Tempat Layanan</td><td>{{ $data->nama_tempat }}</td></tr><tr><td>Kategori</td><td>{{ $data->kategori }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailtempatlayanan/{{ $data->id_tempat }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>'
+
         L.marker([<?= $data->posisi ?>], {icon: iconTempatLayanan})
-        .addTo(tempat_layanan)
+        .addTo(kategori{{ $data->id_kategori}})
         .bindPopup(informasi);
     @endforeach
 
+</script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
 </script>
 
 @endsection
