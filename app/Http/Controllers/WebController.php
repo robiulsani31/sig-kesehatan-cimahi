@@ -47,4 +47,16 @@ class WebController extends Controller
         ];
         return view('v_kategori', $data);
     }
+
+    public function detailtempatlayanan($id_tempat)
+    {
+        $tempat = $this->WebModel->DetailDataTempatLayanan($id_tempat);
+        $data= [
+            'title' => 'Detail '. $tempat->nama_tempat,
+            'kecamatan' => $this->WebModel->DataKecamatan(),
+            'kategori' => $this->WebModel->DataKategori(),
+            'tempat' => $tempat,
+        ];
+        return view('v_detailtempatlayanan', $data);
+    }
 }

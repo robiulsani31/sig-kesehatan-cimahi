@@ -58,5 +58,14 @@ class WebModel extends Model
             ->get();
     }
 
+    public function DetailDataTempatLayanan($id_tempat)
+    {
+        return DB::table('tbl_tempat_layanan')
+            ->join('kategoris', 'kategoris.id_kategori', '=', 'tbl_tempat_layanan.id_kategori')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_tempat_layanan.id_kecamatan')
+            ->where('id_tempat', $id_tempat)
+            ->first();
+    }
+
 
 }

@@ -43,17 +43,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="{{ asset('leaflet-locatecontrol/dist/L.Control.Locate.min.css') }}" />
+  <script src="{{ asset('leaflet-locatecontrol/src/L.Control.Locate.js') }}"></script>
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+  <nav class="main-header navbar navbar-expand-md navbar-light sticky-top navbar-white">
     <div class="container">
       <a href="/" class="navbar-brand">
         <img src="{{ asset('AdminLTE') }}/dist/img/cimahi.png" alt="AdminLTE Logo" class="brand-image"
              style="height: 50px;" >
-        <span class="brand-text font-weight-light" style="padding-left: 5px"><b>SIG Layanan Kesehatan Cimahi</b></span>
+        <span class="brand-text font-weight-light" style="padding-left: 5px"><b>SIG Layanan Kesehatan Kota Cimahi</b></span>
       </a>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Left navbar links -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="/" class="nav-link">Home</a>
+            <a href="/" class="nav-link outline-success">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kecamatan</a>
@@ -82,12 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @endforeach
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="/about" class="nav-link">About</a>
-          </li>
         </ul>
-
-       
       </div>
 
       <!-- Right navbar links -->
@@ -102,15 +99,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper bg-light">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"><small>{{ $title }}</small></h1>
+            <h1 class="m-0 text-dark fw-bold"><small>{{ $title }}</small></h1>
           </div><!-- /.col -->
-
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -128,16 +124,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+  <br>
+
+  <footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-1">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/robiul.sani.9/" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/robiul_sani31/" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/robiul-sani-811980274/" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/robiulsani31" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2023 Copyright:
+    <a class="text-white" href="#">SIG Layanan Kesehatan Kota Cimahi</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 </div>
 <!-- ./wrapper -->
 </body>
+
+
 </html>

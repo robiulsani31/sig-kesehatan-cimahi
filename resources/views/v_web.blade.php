@@ -2,10 +2,18 @@
 @section('content')
 
 
-<div id="map" style="width: 100%; height:550px; box-shadow:10px 10px 10px #888888;"></div>
+<div id="map" style="width: 100%; height:700px; box-shadow:10px 10px 10px #888888;"></div>
 
 <script>
-   var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    navigator.geolocation.getCurrentPosition(function(location) {
+        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+
+       var curlocation = location.coords.latitude + location.coords.longitude;
+
+        // console.log(location.coords.latitude, location.coords.longitude);
+
+    //map view
+    var peta1 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    maxZoom: 20,
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
@@ -64,7 +72,7 @@
             style : {
                 color : 'white',
                 fillColor: '{{ $data->warna }}',
-                fillOpacity: '0.3'
+                fillOpacity: '0.2'
             },
         }).addTo(data{{ $data->id_kecamatan }}).bindPopup("{{ $data->kecamatan }}");
     @endforeach
@@ -75,11 +83,15 @@
         iconSize:  [50, 50],
     });
 
-    var informasi = '<table class="table table-bordered"><tr><td class="text-center" colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="140px"></td></tr><tbody><tr><td>Tempat Layanan</td><td>{{ $data->nama_tempat }}</td></tr><tr><td>Kategori</td><td>{{ $data->kategori }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailtempatlayanan/{{ $data->id_tempat }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>'
+    var informasi = '<table class="table table-bordered"><tr><td class="text-center" colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="140px"></td></tr><tbody><tr><td>Tempat Layanan</td><td>{{ $data->nama_tempat }}</td></tr><tr><td>Kategori</td><td>{{ $data->kategori }}</td></tr><tr><td class="text-center"><a href="/detailtempatlayanan/{{ $data->id_tempat }}" class="btn btn-sm btn-outline-primary">Detail</a></td><td class="text-center"><a href="https://www.google.com/maps/dir/?api=1&origin+ curlocation + &destination={{ urlencode($data->posisi) }}" class="btn btn-sm btn-outline-success" target="_blank">Rute</a></td></tr></tbody></table>'
         L.marker([<?= $data->posisi ?>], {icon: iconTempatLayanan})
         .addTo(tempat_layanan)
         .bindPopup(informasi);
     @endforeach
+
+});
+   
+
 
 </script>
 

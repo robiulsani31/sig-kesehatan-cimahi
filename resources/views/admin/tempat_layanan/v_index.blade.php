@@ -93,6 +93,8 @@
       "responsive": true,
     });
   });
+
+  
 </script>
 
 @endsection
